@@ -9,11 +9,10 @@ Session(app)
 @app.route('/', methods=["GET", "POST"])    
 def index():
     if request.method == "GET":
-        # do sum shit
-        pass
+        return render_template("login.html")
     else:
-        return render_template("index.html")
+        return render_template("login.html")
 
     
-if __main__ == "__name__":
+if __name__ == "__main__":
     main()
