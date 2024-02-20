@@ -1,4 +1,10 @@
-import flask
+from flask import Flask
 
-def main():
-    print("Hello World!")
+app = Flask(__name__) 
+
+@app.route('/')    
+def index():
+    return "Hello, World!"
+    
+if __main__ == "__name__":
+    main()
