@@ -2,6 +2,8 @@ from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from sympy import *
 from sympy.abc import x
+import plotly.graph_objects as go
+
 
 app = Flask(__name__) 
 app.config["SESSION_PERMANENT"] = False
