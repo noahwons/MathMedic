@@ -50,6 +50,17 @@ def simplify():
         
         return render_template("simplify.html", expression=expression)
     
+@app.route('/graph', methods=["GET", "POST"])        
+def graph():
+    #TODO: Does not yet work as intended
+    if request.method == "GET":
+        return render_template("graph.html")
+    else:
+        x = symbols('x')
+        expression = simplify(sympify(request.form.get("expression")))
+        
+        return render_template("graph.html", expression=expression)
+    
     
 if __name__ == "__main__":
     main()
