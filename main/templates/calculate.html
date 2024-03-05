@@ -8,13 +8,13 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Enter any expression, with or without x as your variable, or any number to recieve an answer!</h1>
     <form action="/calculate" method="post">
         <div class="mb-3">
-            <a>For addition, enter single digit numbers in this format: 1+1</a>
             <input class="form-control mx-auto w-auto" type="text" autofocus id="expression" name="expression" placeholder="Enter Function">
         </div>
         {% if expression %}
-            <a>{{ expression }}</a>
+            <h1>{{ expression }}</h1>
         {% endif %}
     </form>
 </body>
