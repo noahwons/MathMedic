@@ -10,12 +10,14 @@
 <body>
     <form action="/graph" method="post">
         <div class="mb-3">
-            <h1>Enter Expression To Be Graphed</h1>
-            <input class="form-control mx-auto w-auto" type="text" autofocus id="expression" name="expression" placeholder="Enter Function">
+            <h1>Enter Function To Be Graphed</h1>
+            <input class="form-control mx-auto w-auto" type="text" autofocus id="function" name="function" placeholder="Enter Function">
         </div>
-        {% if expression %}
-            <a>{{ expression }}</a>
+
+        {% if plot_data %}
+            <img src="data:image/png;base64,{{ plot_data }}" alt="Plot of sin(x)">
         {% endif %}
+
     </form>
 </body>
     

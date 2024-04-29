@@ -6,6 +6,12 @@ import numpy as np
 from werkzeug.security import check_password_hash, generate_password_hash
 import plotly.graph_objects as go
 from cs50 import SQL
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+import io
+import base64
 
 
 
@@ -103,9 +109,28 @@ def graph():
         return render_template("graph.html")
     else:
         x = symbols('x')
-        expression = simplify(sympify(request.form.get("expression")))
+        function = request.form.get("function")
+        function = function.replace("^", "**").replace("sin", "np.sin").replace("cos", "np.cos").replace("tan", "np.tan")
+        min = -10
+        max = 10
+        x_values = np.linspace(min, max, 1000) 
         
-        return render_template("graph.html", expression=expression)
+        def numpy_function(x):
+            return eval(function)
+        
+        y_values = numpy_function(x_values)   
+        plt.plot(x_values, y_values)
+        plt.xlabel('x')
+        plt.ylabel(function)
+        plt.title('Plot of ' + function)
+        plt.grid(True)
+        plt.show()
+        buffer = io.BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)
+        plot_data = base64.b64encode(buffer.getvalue()).decode('utf-8')
+        plt.close()
+        return render_template("graph.html", plot_data=plot_data)
     
 @app.route("/failure")
 def failure():
@@ -118,6 +143,6 @@ def logout():
 
     return redirect("/")
     
-    
+
 if __name__ == "__main__":
     main()
